@@ -37,20 +37,21 @@ foreach(dir ${BOOST_SUBS})
     include_directories("${dir}/include/")
 endforeach()
 
-add_subdirectory(${PROJECT_DIR}/paal)
-    
 include_directories("${PROJECT_DIR}/src/include/")
-include_directories (${PROJECT_DIR}/paal/include)
+
+find_package( Boost REQUIRED COMPONENTS program_options regex system filesystem )
+include_directories( ${Boost_INCLUDE_DIRS} )
 
 file(GLOB BINS "${PROJECT_DIR}/*.cpp")
 message(${BINS})
 message(${PROJECT_DIR})
+message("Boost  "${Boost_SYSTEM_LIBRARY})
+message("Boost  "${Boost_PROGRAM_OPTIONS_LIBRARY})
 
 foreach(BIN ${BINS})
     get_filename_component(n ${BIN} NAME_WE)
     add_executable(${n} ${BIN})
-    #target_link_libraries (${n} boost_iostreams boost_program_options boost_filesystem boost_system boost_interprocess z bz2 -static-libstdc++)
-    target_link_libraries (${n} boost_iostreams boost_program_options boost_filesystem boost_system z bz2 rt -static-libstdc++)
+    target_link_libraries (${n} ${Boost_IOSTREAMS_LIBRARY} ${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY}  z bz2 rt -static-libstdc++)
 endforeach()
 
 

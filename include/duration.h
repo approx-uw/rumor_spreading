@@ -2,7 +2,9 @@
 #define PAAL_DURATION_H
 
 #include <chrono>
+#include <iostream>
 #include <string>
+
 
 template<typename F, typename ...Args>
 auto measure_time(std::string const & name, F&& func, Args&&... args) {
