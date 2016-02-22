@@ -1,10 +1,10 @@
-#ifndef PAAL_DURATION_H
-#define PAAL_DURATION_H
+#ifndef DURATION_H
+#define DURATION_H
 
 #include <chrono>
 #include <iostream>
 #include <string>
-
+#include <utility>
 
 template<typename F, typename ...Args>
 auto measure_time(std::string const & name, F&& func, Args&&... args) {
@@ -15,4 +15,4 @@ auto measure_time(std::string const & name, F&& func, Args&&... args) {
     std::cout << name << " time "  << duration.count() << std::endl;
     return std::move(ret);
 }
-#endif /* PAAL_DURATION_H */
+#endif /* DURATION_H */

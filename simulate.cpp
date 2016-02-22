@@ -1,20 +1,13 @@
-#include "include/graph.h"
-#include "include/duration.h"
 #include "include/alphas_strategies.h"
+#include "include/duration.h"
+#include "include/graph.h"
 #include "include/models.h"
 
 #include <boost/program_options.hpp>
-#include <boost/range/adaptor/map.hpp>
-#include <boost/range/algorithm/copy.hpp>
-#include <boost/range/irange.hpp>
-#include "boost/filesystem.hpp"   // includes all needed Boost.Filesystem declarations
 
-#include <iostream>
 #include <cassert>
-#include <chrono>
 #include <fstream>
-#include <stdexcept>
-#include <unordered_map>
+#include <iostream>
 
 using namespace std;
 
@@ -97,7 +90,7 @@ int main(int const argc, char const * const * const argv) {
         std::cout << "File '" << output << "' already exists!" << std::endl;
         return EXIT_SUCCESS;
     }
-        
+
 
     std::unique_ptr<Model> model;
     std::unique_ptr<GetAlpha> get_alpha;
@@ -114,11 +107,7 @@ int main(int const argc, char const * const * const argv) {
         get_alpha = make_unique<GetConstAlpha>(alpha);
     } else if (alpha_strategy == "exp") {
         get_alpha = make_unique<GetExponentAlpha>(alpha);
-    } else if (alpha_strategy == "pld") {
-        get_alpha = make_unique<GetPowerLawAlpha>(alpha);
-    } else if (alpha_strategy == "lin") {
-        get_alpha = make_unique<GetLinearAlpha>(alpha);
-    }else {
+    } else {
         assert(false);
     }
 
