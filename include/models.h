@@ -1,9 +1,10 @@
-#ifndef PAAL_MODELS_H
-#define PAAL_MODELS_H
+#ifndef MODELS_H
+#define MODELS_H
 
 #include "common.h"
 #include "alphas_strategies.h"
 
+#include <random>
 #include <unordered_set>
 
 struct Model {
@@ -103,4 +104,4 @@ struct ModelManyDecisions : public Model {
         return spreaders_cnt;
     }
 };
-#endif /* PAAL_MODELS_H */
+#endif /* MODELS_H */

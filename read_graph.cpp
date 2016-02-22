@@ -1,16 +1,12 @@
 #include "include/graph.h"
 
 #include <boost/program_options.hpp>
-#include <boost/range/adaptor/map.hpp>
 #include <boost/range/algorithm/copy.hpp>
 
-#include <iostream>
 #include <cassert>
 #include <chrono>
 #include <fstream>
-#include <stdexcept>
-#include <random>
-#include <unordered_map>
+#include <iostream>
 #include <unordered_set>
 
 using namespace boost::interprocess;
@@ -94,7 +90,7 @@ int main(int const argc, char const * const * const argv)
     std::cout << "Read time " << duration.count() << std::endl;
 
     std::cerr << "Data read" << std::endl;
-    sleep(3600 * 24 * 7 * 8); // eight weeks
+    sleep(-1);
 
     return EXIT_SUCCESS;
 }

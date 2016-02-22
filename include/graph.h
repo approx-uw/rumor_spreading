@@ -1,12 +1,13 @@
-#ifndef PAAL_GRAPH_H
-#define PAAL_GRAPH_H
+#ifndef GRAPH_H
+#define GRAPH_H
 
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/vector.hpp>
 #include <boost/unordered_map.hpp>     //boost::unordered_map
-#include <functional>                  //std::equal_to
 #include <boost/functional/hash.hpp>   //boost::hash
+
+#include <functional>                  //std::equal_to
 
 using VectorShmemAllocator = boost::interprocess::allocator<int, boost::interprocess::managed_shared_memory::segment_manager>;
 
@@ -27,4 +28,4 @@ using Graph =  boost::unordered_map
 < KeyType               , MappedType
 , boost::hash<KeyType>  ,std::equal_to<KeyType>
 , UMapShmemAllocator>;
-#endif /* PAAL_GRAPH_H */
+#endif /* GRAPH_H */

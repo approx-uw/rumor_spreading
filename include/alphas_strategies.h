@@ -1,10 +1,7 @@
-#ifndef PAAL_ALPHAS_STRATEGIES_H
-#define PAAL_ALPHAS_STRATEGIES_H
+#ifndef ALPHAS_STRATEGIES_H
+#define ALPHAS_STRATEGIES_H
 
-#include <boost/range/irange.hpp>
-#include <boost/range/numeric.hpp>
-
-#include <string>
+#include <cassert>
 
 struct GetAlpha {
     virtual float operator()(int /*iteration_nr*/) const = 0;
@@ -34,35 +31,4 @@ struct GetExponentAlpha: public GetAlpha {
     mutable int m_iteration_of_last_query;
 };
 
-struct GetPowerLawAlpha : public GetAlpha {
-    GetPowerLawAlpha(float alpha) : m_alphas(MAX_ITER) {
-        for (int i : boost::irange(0, MAX_ITER)) {
-            m_alphas[i] = std::pow(i+1, -alpha);
-        }
-
-        auto const sum = boost::accumulate(m_alphas, 0.);
-
-        for (auto & alpha : m_alphas) alpha /= sum;
-    }
-
-    float operator()(int i) const override {
-        //AAAAAAAAAAAAAAAAAAAA!!!!!!!!!ale nahakowane !!!!!!!!!!!!
-        assert(i + 1 < MAX_ITER);
-        return m_alphas[i + 1];
-    }
-
-    int const MAX_ITER = 1000;
-    std::vector<double> m_alphas;
-};
-
-struct GetLinearAlpha : public GetAlpha {
-    GetLinearAlpha(float alpha) : m_alpha(alpha) {}
-
-    float operator()(int const iteration_nr) const override {
-        return m_alpha / (iteration_nr + 1); //iteration starts with 0
-    }
-
-    float const m_alpha;
-};
-
-#endif /* PAAL_ALPHAS_STRATEGIES_H */
+#endif /* ALPHAS_STRATEGIES_H */
